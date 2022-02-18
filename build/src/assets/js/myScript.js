@@ -228,16 +228,23 @@ $(document).ready(() => {
         var grandtotal = parseFloat($(".grand-total").text().replace(regex, ""));
         var payment = parseFloat($(".payment").val().replace(regex, ""));
         var change = payment - grandtotal;
+        let message = "";
+        if (payment === grandtotal) {
+          message = "You paid the exact amount.";
+        } else {
+          message = change.toLocaleString("en-US", { style: "currency", currency: "PHP" }) + " is your change.";
+        }
         if (payment >= grandtotal) {
           $("#isEmpty").html(`
           <div class="flex flex-col text-center bg-green-500 rounded-lg w-full py-4 mt-5 mb-5">
             <div class="px-8 font-semibold text-gray-100">
                 <p class="text-base xl:text-xl">Payment successful!</p>
-                <p class="text-base xl:text-xl">Change: ${change.toLocaleString("en-US", { style: "currency", currency: "PHP" })}</p>
+                <p class="text-base xl:text-xl">${message}</p>
+                <p class="text-base xl:text-xl">Thank you for shopping with us.</p>
             </div>
           </div>
           `);
-          setTimeout(() => { form.submit() }, 2400);
+          setTimeout(() => { form.submit(), window.location.replace('https://paa-ni-elots.netlify.app/src/pages/products.html') }, 2400);
         } else {
           toastr.error("Insufficient payment!");
         }

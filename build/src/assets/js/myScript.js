@@ -180,7 +180,7 @@ $(document).ready(() => {
     // Tax
     $(".tax").each(function () {
       var subtotal = parseFloat($(".sub-total-price").text().replace(regex, ""));
-      var tax = subtotal * 0.69;
+      var tax = subtotal * 0.20;
       $(this).text(tax.toLocaleString("en-US", { style: "currency", currency: "PHP" }));
     });
 
